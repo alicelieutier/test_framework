@@ -1,4 +1,4 @@
-(function(exports){
+(function testRunner(exports) {
 
     class TestError {
         constructor(message) {
@@ -63,4 +63,4 @@
     exports.it = it;
     exports.expect = expect;
 
-})(this);
+}(this));
