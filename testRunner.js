@@ -5,7 +5,6 @@
             this.message = message
         }
         toString() {
-            console.log('hi')
             return `Test Failed: ${this.message}`;
         }
     }
@@ -32,7 +31,7 @@
     const expect = (code) => ({
         toEq: (expected) => {
             if (code !== expected) {
-                throw new TestError(`expected ${actual} to equal ${expected}`)
+                throw new TestError(`expected ${code} to equal ${expected}`)
             }
         },
         toThrow: (expectedErrorMessage) => {
