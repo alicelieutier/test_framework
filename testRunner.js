@@ -9,6 +9,18 @@
         }
     }
 
+    const mock = (mockMethods, mockValues) => {
+        class Mock {
+            constructor() {
+                return mockValues;
+            }
+        }
+        for (let methodName in mockMethods) {
+            Mock.prototype[methodName] = mockMethods[methodName]
+        }
+        return new Mock();
+    }
+
     const describe = (message, callback) => {
         logToDocument(message);
         callback();
@@ -32,6 +44,16 @@
         toEq: (expected) => {
             if (code !== expected) {
                 throw new TestError(`expected ${code} to equal ${expected}`)
+            }
+        },
+        toContain: (expectedString) => {
+            if (code.search(expectedString) < 0) {
+                throw new TestError(`expected ${code} to contain "${expectedString}"`);
+            }
+        },
+        toBeEmpty: () => {
+            if (code.trim() !== '') {
+                throw new TestError(`expected ${code} to be an empty string`);
             }
         },
         toThrow: (expectedErrorMessage) => {
@@ -62,5 +84,6 @@
     exports.describe = describe;
     exports.it = it;
     exports.expect = expect;
+    exports.mock = mock;
 
 }(this));
