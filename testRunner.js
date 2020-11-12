@@ -1,4 +1,5 @@
 (function testRunner(exports) {
+    const testDiv = document.getElementById('tests');
 
     class TestError {
         constructor(message) {
@@ -10,20 +11,20 @@
     }
 
     const describe = (message, callback) => {
-        logToDocument(message);
+        display(message);
         callback();
     }
 
     const it = (message, callback) => {
         try {
             callback();
-            logToDocument(message, '2em');
+            display(message, '2em');
         } catch (error) {
-            logToDocument(message, '2em', 'red');
+            display(message, '2em', 'red');
             if (error instanceof TestError) {
-                logToDocument(error.toString(), '4em', 'red');
+                display(error.toString(), '4em', 'red');
             } else {
-                logToDocument(error.stack, '4em', 'red');
+                display(error.stack, '4em', 'red');
             }
         }
     }
@@ -61,8 +62,7 @@
         }
     })
 
-    const logToDocument = (text, padding = '0', color = 'green') => {
-        const testDiv = document.getElementById('tests');
+    const display = (text, padding = '0', color = 'green') => {
         const paragraph = document.createElement('p');
         paragraph.innerText = text;
         paragraph.style = `color: ${color}; padding-left: ${padding}`;
