@@ -9,18 +9,6 @@
         }
     }
 
-    const mock = (mockMethods, mockValues) => {
-        class Mock {
-            constructor() {
-                return mockValues;
-            }
-        }
-        for (let methodName in mockMethods) {
-            Mock.prototype[methodName] = mockMethods[methodName]
-        }
-        return new Mock();
-    }
-
     const describe = (message, callback) => {
         logToDocument(message);
         callback();
@@ -84,6 +72,5 @@
     exports.describe = describe;
     exports.it = it;
     exports.expect = expect;
-    exports.mock = mock;
 
-}(this));
+})(this);
